@@ -53,6 +53,6 @@ tasks.withType(Test) {
 
 task amazon_test(type: Test) {
     useJUnitPlatform {
-        includeTags("remote")
+        includeTags("amazon")
     }
 }
