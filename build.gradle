@@ -51,8 +51,8 @@ tasks.withType(Test) {
     systemProperties(System.getProperties())
 }
 
-task amazon_test(type: Test) {
+task web_test(type: Test) {
     useJUnitPlatform {
-        includeTags("amazon")
+        includeTags("web")
     }
 }

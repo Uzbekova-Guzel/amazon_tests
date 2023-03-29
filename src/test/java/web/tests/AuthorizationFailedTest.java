@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class AuthorizationFailedTest {
 
     @Test
-    @Tag("amazon")
+    @Tag("web")
     @Owner("Guzel Uzbekova")
     @DisplayName("Авторизация с некорректным email")
     void authFailWithEmailTest() {
