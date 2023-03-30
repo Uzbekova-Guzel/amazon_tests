@@ -1,37 +1,21 @@
-package web.tests;
+package amazon.tests;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TestsAmazon {
+public class TestsAmazon extends TestBase {
 
     @DisplayName("Тесты на 'https://www.amazon.com/'")
-    @BeforeAll
-    static void setUp() {
-        Configuration.browserSize = "1920x1080";
-        open("https://www.amazon.com/");
-    }
-
-    static Stream<Arguments> amazonShouldContainAllOfButtonsForGiveLocaleTest() {
-        return Stream.of(
-
-                Arguments.of(AmazonLocale.ES, List.of("Ofertas del Día", "Servicio al Cliente", "Listas", "Tarjetas de Regalo", "Vender")),
-                Arguments.of(AmazonLocale.EN, List.of("Today's Deals", "Customer Service", "Registry", "Gift Cards", "Sell"))
-        );
-    }
 
     @MethodSource("amazonShouldContainAllOfButtonsForGiveLocaleTest")
     @ParameterizedTest(name = "Для локали {0} отображаются кнопки {1}")

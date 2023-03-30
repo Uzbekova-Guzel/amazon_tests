@@ -1,4 +1,4 @@
-package web.config;
+package amazon.config;
 
 import org.aeonbits.owner.Config;
 
