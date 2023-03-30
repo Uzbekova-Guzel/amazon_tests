@@ -19,7 +19,7 @@ public class WebDriverProvider extends TestBase {
         Configuration.browser = config.getBrowser();
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browserVersion = config.getBrowserVersion();
-        Configuration.remote = config.getRemoteUrl();
+        Configuration.remote = config.getRemoteURL();
         Configuration.browserSize = config.getBrowserSize();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
