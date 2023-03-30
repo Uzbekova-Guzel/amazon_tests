@@ -1,13 +1,13 @@
-package amazon;
+package amazon.config;
 
-import amazon.config.WebDriverConfig;
+import amazon.TestBase;
 import com.codeborne.selenide.Configuration;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class WebDriverProvider {
+import java.util.Map;
 
-
+public class WebDriverProvider extends TestBase {
     private WebDriverConfig config;
 
     public WebDriverProvider() {
@@ -16,23 +16,17 @@ public class WebDriverProvider {
     }
 
     private void createWebDriver() {
-        switch (config.getBrowser().toLowerCase()) {
-            case "chrome":
-                Configuration.browser = "chrome";
-                break;
-            case "firefox":
-                Configuration.browser = "firefox";
-                break;
-            default:
-                throw new RuntimeException(config.getBrowser());
-        }
-
+        Configuration.browser = config.getBrowser();
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browserVersion = config.getBrowserVersion();
         Configuration.remote = config.getRemoteUrl();
+        Configuration.browserSize = config.getBrowserSize();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 }

@@ -1,5 +1,6 @@
 package amazon;
 
+import amazon.config.WebDriverProvider;
 import amazon.pages.AmazonWebPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -22,6 +23,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         WebDriverProvider provider = new WebDriverProvider();
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.browserSize = "1920x1080";
