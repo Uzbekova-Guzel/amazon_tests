@@ -1,9 +1,8 @@
-package amazon.tests;
+package amazon;
 
 import amazon.pages.AmazonWebPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverProvider;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -22,7 +21,7 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-//        WebDriverProvider provider = new WebDriverProvider();
+        WebDriverProvider provider = new WebDriverProvider();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.browserSize = "1920x1080";

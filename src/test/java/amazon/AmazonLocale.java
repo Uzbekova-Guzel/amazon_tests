@@ -1,4 +1,4 @@
-package amazon.tests;
+package amazon;
 
 public enum AmazonLocale {
     EN, ES

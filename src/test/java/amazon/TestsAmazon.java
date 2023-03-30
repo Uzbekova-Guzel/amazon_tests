@@ -1,4 +1,4 @@
-package amazon.tests;
+package amazon;
 
 import com.codeborne.selenide.CollectionCondition;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class TestsAmazon extends TestBase {
 
     @DisplayName("Тесты на 'https://www.amazon.com/'")
-
     @MethodSource("amazonShouldContainAllOfButtonsForGiveLocaleTest")
     @ParameterizedTest(name = "Для локали {0} отображаются кнопки {1}")
     @Tag("web")
