@@ -1,10 +1,13 @@
 package amazon;
 
-import amazon.pages.AmazonWebPage;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.List;
 
 import static io.qameta.allure.Allure.step;
 
@@ -29,41 +32,24 @@ public class TestsAmazon extends TestBase {
         });
 
     }
+
+
+    @DisplayName("Отображение набора кнопок в верхней панели на испанском и на английском языках")
+    @MethodSource("amazonShouldContainAllOfButtonsForGiveLocale")
+    @ParameterizedTest(name = "Для локали {0} отображаются кнопки {1}")
+    @Tag("web")
+    void amazonShouldContainAllOfButtonsForGiveLocaleTest(
+            AmazonLocale amazonLocale,
+            List<String> buttons
+    ) {
+        amazonWebPage.openPageAmazon()
+                .changeLanguage(amazonLocale)
+                .checkButtonsForGiveLocale(buttons);
+    }
 }
 
 
 
-//
-//    @BeforeAll
-//    static void beforeAll() {
-//        WebDriverProvider provider = new WebDriverProvider();
-//
-//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-//
-//    }
-//
-//    static Stream<Arguments> amazonShouldContainAllOfButtonsForGiveLocaleTest() {
-//        return Stream.of(
-//
-//                Arguments.of(AmazonLocale.ES, List.of("Ofertas del Día", "Servicio al Cliente", "Listas", "Tarjetas de Regalo", "Vender")),
-//                Arguments.of(AmazonLocale.EN, List.of("Today's Deals", "Customer Service", "Registry", "Gift Cards", "Sell"))
-//        );
-//    }
-//    @DisplayName("Тесты на 'https://www.amazon.com/'")
-//    @MethodSource("amazonShouldContainAllOfButtonsForGiveLocaleTest")
-//    @ParameterizedTest(name = "Для локали {0} отображаются кнопки {1}")
-//    @Tag("web")
-//    void amazonShouldContainAllOfButtonsForGiveLocaleTest(
-//            AmazonLocale amazonLocale,
-//            List<String> buttons
-//    ) {
-//        $(".icp-nav-link-inner").hover();
-//        $(byText(String.valueOf(amazonLocale))).click();
-//        $$(".nav-progressive-content a")
-//                .filter(visible)
-//                .shouldHave(texts(buttons));
-//    }
-//
 //    @CsvSource({
 //            "xbox, Video Games",
 //            "iphone 14, Cell Phones"
@@ -77,6 +63,7 @@ public class TestsAmazon extends TestBase {
 //        $("#twotabsearchtextbox").setValue(Name).pressEnter();
 //        $("#departments").shouldHave(text(Product));
 //    }
+//
 //
 //    //Вариант теста amazonSearchAndFindProductsTest с применением CsvFileSource
 //    @CsvFileSource(resources = "/amazonSearchAndFindProducts.csv")

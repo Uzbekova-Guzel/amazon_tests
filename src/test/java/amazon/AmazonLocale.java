@@ -1,5 +1,5 @@
 package amazon;
 
 public enum AmazonLocale {
-    EN, ES
+    ES, EN
 }

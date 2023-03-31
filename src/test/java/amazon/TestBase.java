@@ -9,6 +9,10 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.provider.Arguments;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 public class TestBase {
     AmazonWebPage amazonWebPage = new AmazonWebPage();
@@ -34,5 +38,13 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+    }
+
+    static Stream<Arguments> amazonShouldContainAllOfButtonsForGiveLocale() {
+        return Stream.of(
+
+                Arguments.of(AmazonLocale.ES, List.of("Ofertas del Día", "Servicio al Cliente", "Listas", "Tarjetas de Regalo", "Vender")),
+                Arguments.of(AmazonLocale.EN, List.of("Today's Deals", "Customer Service", "Registry", "Gift Cards", "Sell"))
+        );
     }
 }

@@ -1,9 +1,14 @@
 package amazon.pages;
 
+import amazon.AmazonLocale;
+
+import java.util.List;
+
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class AmazonWebPage {
     private static final String MAIN_PAGE_TEXT = "Gaming accessories";
@@ -11,7 +16,6 @@ public class AmazonWebPage {
 
     public AmazonWebPage openPageAmazon() {
         open("https://www.amazon.com/");
-        $(".gw-card-layout").shouldHave(text(MAIN_PAGE_TEXT));
         return this;
     }
 
@@ -31,6 +35,18 @@ public class AmazonWebPage {
         return this;
     }
 
+    public AmazonWebPage changeLanguage(AmazonLocale amazonLocale) {
+        $(".icp-nav-link-inner").hover();
+        $(byText(String.valueOf(amazonLocale))).click();
+        return this;
+    }
+
+    public AmazonWebPage checkButtonsForGiveLocale(List<String> value) {
+        $$(".nav-progressive-content a")
+                .filter(visible)
+                .shouldHave(texts(value));
+        return this;
+    }
 
 
 }
