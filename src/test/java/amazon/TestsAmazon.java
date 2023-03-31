@@ -55,7 +55,7 @@ public class TestsAmazon extends TestBase {
     @ParameterizedTest(name = "При поиске по товару {0} появляются товары из раздела {1}")
     @Tag("web")
     @Owner("UzbekovaGV")
-    void amazonSearchAndFindProductsWithCsvFileTest(
+    void amazonSearchAndFindProductsTest(
             String Name,
             String Product
     ) {
