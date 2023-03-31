@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -13,8 +14,9 @@ import static io.qameta.allure.Allure.step;
 
 public class TestsAmazon extends TestBase {
 
-    @Test
+
     @DisplayName("Переход на главную страницу при клике на лого Amazon")
+    @Test
     @Tag("web")
     @Owner("UzbekovaGV")
     void goMainPageByLogo() {
@@ -38,6 +40,7 @@ public class TestsAmazon extends TestBase {
     @MethodSource("amazonShouldContainAllOfButtonsForGiveLocale")
     @ParameterizedTest(name = "Для локали {0} отображаются кнопки {1}")
     @Tag("web")
+    @Owner("UzbekovaGV")
     void amazonShouldContainAllOfButtonsForGiveLocaleTest(
             AmazonLocale amazonLocale,
             List<String> buttons
@@ -46,48 +49,36 @@ public class TestsAmazon extends TestBase {
                 .changeLanguage(amazonLocale)
                 .checkButtonsForGiveLocale(buttons);
     }
-}
 
 
+    @CsvFileSource(resources = "/amazonSearchAndFindProducts.csv")
+    @ParameterizedTest(name = "При поиске по товару {0} появляются товары из раздела {1}")
+    @Tag("web")
+    @Owner("UzbekovaGV")
+    void amazonSearchAndFindProductsWithCsvFileTest(
+            String Name,
+            String Product
+    ) {
+        amazonWebPage.openPageAmazon()
+                .searchProductName(Name)
+                .checkProductDepartment(Product);
+    }
 
-//    @CsvSource({
-//            "xbox, Video Games",
-//            "iphone 14, Cell Phones"
-//    })
-//    @ParameterizedTest(name = "При поиске по товару {0} появляются товары из раздела {1}")
-//    @Tag("web")
-//    void amazonSearchAndFindProductsTest(
-//            String Name,
-//            String Product
-//    ) {
-//        $("#twotabsearchtextbox").setValue(Name).pressEnter();
-//        $("#departments").shouldHave(text(Product));
-//    }
-//
-//
-//    //Вариант теста amazonSearchAndFindProductsTest с применением CsvFileSource
-//    @CsvFileSource(resources = "/amazonSearchAndFindProducts.csv")
-//    @ParameterizedTest(name = "При поиске по товару {0} появляются товары из раздела {1}")
-//    @Tag("web")
-//    void amazonSearchAndFindProductsWithCsvFileTest(
-//            String Name,
-//            String Product
-//    ) {
-//        $("#twotabsearchtextbox").setValue(Name).pressEnter();
-//        $("#departments").shouldHave(text(Product));
-//    }
-//
 //    @ValueSource(
 //            strings = {"Electronics", "Computers"}
 //    )
 //    @ParameterizedTest(name = "Разделы каталога {0} больше 5")
 //    @Tag("web")
+//    @Owner("UzbekovaGV")
 //    void amazonCatalogsCountTest(
 //            String catalogs
 //    ) {
+//        amazonWebPage.openPageAmazon();
 //        $("#nav-hamburger-menu").click();
 //        $("#hmenu-content").$(byText(catalogs)).click();
 //        $$(".hmenu-item").shouldHave(CollectionCondition.sizeGreaterThan(5));
 //        $(".hmenu-close-icon").click();
 //    }
+}
+
 

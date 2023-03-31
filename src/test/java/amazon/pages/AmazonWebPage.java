@@ -48,6 +48,16 @@ public class AmazonWebPage {
         return this;
     }
 
+    public AmazonWebPage searchProductName(String Name) {
+        $("#twotabsearchtextbox").setValue(Name).pressEnter();
+        return this;
+    }
+
+    public AmazonWebPage checkProductDepartment(String Product) {
+        $("#departments").shouldHave(text(Product));
+        return this;
+    }
+
 
 }
 
