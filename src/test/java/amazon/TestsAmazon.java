@@ -20,7 +20,7 @@ public class TestsAmazon extends TestBase {
     @Test
     @Tag("web")
     @Owner("UzbekovaGV")
-    void goMainPageByLogo() {
+    void goMainPageByLogoTest() {
         step("Открыть страницу 'https://www.amazon.com/'", () -> {
             amazonWebPage.openPageAmazon();
         });
@@ -34,6 +34,32 @@ public class TestsAmazon extends TestBase {
             amazonWebPage.verifyMainPage();
         });
 
+    }
+
+
+    @DisplayName("Выбор локации доставки")
+    @Test
+    @Tag("web")
+    @Owner("UzbekovaGV")
+    void deliveryLocationTest() {
+        step("Открыть страницу 'https://www.amazon.com/'", () -> {
+            amazonWebPage.openPageAmazon();
+        });
+        step("Открыть окно выбора локации", () -> {
+            amazonWebPage.openGlobalLocation();
+        });
+        step("Открыть список локаций", () -> {
+            amazonWebPage.locationsList();
+        });
+        step("Выбрать локацию", () -> {
+            amazonWebPage.choiceLocation();
+        });
+        step("Закрыть окно выбора локации", () -> {
+            amazonWebPage.closeGlobalLocation();
+        });
+        step("В заголовке отображается выбранная локация", () -> {
+            amazonWebPage.checkSelectedLocation();
+        });
     }
 
 

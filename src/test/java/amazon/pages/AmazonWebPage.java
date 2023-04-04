@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class AmazonWebPage {
     private static final String MAIN_PAGE_TEXT = "Gaming accessories";
     private static final String TODAYS_DEALS_TEXT = "Today's Deals";
+    private static final String LOCATION = "Germany";
 
     public AmazonWebPage openPageAmazon() {
         open("https://www.amazon.com/");
@@ -33,6 +34,31 @@ public class AmazonWebPage {
 
     public AmazonWebPage verifyMainPage() {
         $(".gw-card-layout").shouldHave(text(MAIN_PAGE_TEXT));
+        return this;
+    }
+
+    public AmazonWebPage openGlobalLocation() {
+        $("#nav-global-location-data-modal-action").click();
+        return this;
+    }
+
+    public AmazonWebPage locationsList() {
+        $(".a-dropdown-container").click();
+        return this;
+    }
+
+    public AmazonWebPage choiceLocation() {
+        $("#GLOWFeature_AddressList").$(byText(LOCATION)).click();
+        return this;
+    }
+
+    public AmazonWebPage closeGlobalLocation() {
+        $(".a-popover-footer").$(byText("Done")).click();
+        return this;
+    }
+
+    public AmazonWebPage checkSelectedLocation() {
+        $("#nav-global-location-data-modal-action").shouldHave(text(LOCATION));
         return this;
     }
 
