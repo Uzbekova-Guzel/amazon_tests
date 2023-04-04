@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -64,21 +65,21 @@ public class TestsAmazon extends TestBase {
                 .checkProductDepartment(Product);
     }
 
-//    @ValueSource(
-//            strings = {"Electronics", "Computers"}
-//    )
-//    @ParameterizedTest(name = "Разделы каталога {0} больше 5")
-//    @Tag("web")
-//    @Owner("UzbekovaGV")
-//    void amazonCatalogsCountTest(
-//            String catalogs
-//    ) {
-//        amazonWebPage.openPageAmazon();
-//        $("#nav-hamburger-menu").click();
-//        $("#hmenu-content").$(byText(catalogs)).click();
-//        $$(".hmenu-item").shouldHave(CollectionCondition.sizeGreaterThan(5));
-//        $(".hmenu-close-icon").click();
-//    }
+    @ValueSource(
+            strings = {"Electronics", "Computers"}
+    )
+    @ParameterizedTest(name = "Разделы каталога {0} больше 5")
+    @Tag("web")
+    @Owner("UzbekovaGV")
+    void amazonCatalogsCountTest(
+            String catalog
+    ) {
+        amazonWebPage.openPageAmazon()
+                .openMainMenu()
+                .openCatalog(catalog)
+                .checkCatalogsItems()
+                .closeMainMenu();
+    }
 }
 
 

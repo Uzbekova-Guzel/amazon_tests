@@ -1,6 +1,7 @@
 package amazon.pages;
 
 import amazon.AmazonLocale;
+import com.codeborne.selenide.CollectionCondition;
 
 import java.util.List;
 
@@ -58,6 +59,24 @@ public class AmazonWebPage {
         return this;
     }
 
+    public AmazonWebPage openMainMenu() {
+        $("#nav-hamburger-menu").click();
+        return this;
+    }
 
+    public AmazonWebPage openCatalog(String catalog) {
+        $("#hmenu-content").$(byText(catalog)).click();
+        return this;
+    }
+
+    public AmazonWebPage checkCatalogsItems() {
+        $$(".hmenu-item").shouldHave(CollectionCondition.sizeGreaterThan(5));
+        return this;
+    }
+
+    public AmazonWebPage closeMainMenu() {
+        $(".hmenu-close-icon").click();
+        return this;
+    }
 }
 
