@@ -1,6 +1,5 @@
 package amazon;
 
-import amazon.config.WebDriverConfig;
 import amazon.config.WebDriverProvider;
 import amazon.pages.AmazonWebPage;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -14,16 +13,14 @@ import org.junit.jupiter.params.provider.Arguments;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 public class TestBase {
     AmazonWebPage amazonWebPage = new AmazonWebPage();
-    private static WebDriverConfig config;
-
 
     @BeforeAll
-    static void beforeAll() {
-
-        WebDriverProvider provider = new WebDriverProvider();
-
+    static void setUp() {
+        WebDriverProvider.setConfig();
     }
 
     @BeforeEach
@@ -38,6 +35,12 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+    }
+
+
+    @AfterEach
+    void close() {
+        closeWebDriver();
     }
 
     static Stream<Arguments> amazonShouldContainAllOfButtonsForGiveLocale() {

@@ -33,7 +33,6 @@ public class TestsAmazon extends TestBase {
         step("Переход осуществился на главную страницу Amazon", () -> {
             amazonWebPage.verifyMainPage();
         });
-
     }
 
 

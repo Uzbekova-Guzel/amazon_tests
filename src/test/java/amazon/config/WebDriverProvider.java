@@ -1,26 +1,25 @@
 package amazon.config;
 
-import amazon.TestBase;
 import com.codeborne.selenide.Configuration;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
-public class WebDriverProvider extends TestBase {
-    private WebDriverConfig config;
+public class WebDriverProvider {
 
-    public WebDriverProvider() {
-        this.config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
-        createWebDriver();
-    }
+    public static WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
-    private void createWebDriver() {
-        Configuration.browser = config.getBrowser();
-        Configuration.baseUrl = config.getBaseUrl();
-        Configuration.browserVersion = config.getBrowserVersion();
-        Configuration.remote = config.getRemoteURL();
-        Configuration.browserSize = config.getBrowserSize();
+    public static void setConfig() {
+
+        Configuration.baseUrl = WebDriverProvider.config.getBaseUrl();
+        Configuration.browser = WebDriverProvider.config.getBrowserName();
+        Configuration.browserVersion = WebDriverProvider.config.getBrowserVersion();
+        Configuration.browserSize = WebDriverProvider.config.getBrowserSize();
+        String remoteUrl = WebDriverProvider.config.getRemoteUrl();
+        if (remoteUrl != null) {
+            Configuration.remote = remoteUrl;
+        }
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
