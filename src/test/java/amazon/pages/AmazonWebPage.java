@@ -1,9 +1,7 @@
 package amazon.pages;
 
 import amazon.AmazonLocale;
-import amazon.config.WebDriverConfig;
 import com.codeborne.selenide.CollectionCondition;
-import org.aeonbits.owner.ConfigFactory;
 
 import java.util.List;
 
@@ -15,18 +13,13 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class AmazonWebPage {
 
-    WebDriverConfig webDriverConfig;
-
     private static final String MAIN_PAGE_TEXT = "Gaming accessories";
     private static final String TODAYS_DEALS_TEXT = "Today's Deals";
     private static final String LOCATION = "Germany";
 
-    public AmazonWebPage() {
-        this.webDriverConfig = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
-    }
 
     public AmazonWebPage openPageAmazon() {
-        open(webDriverConfig.getBaseUrl());
+        open("");
         return this;
     }
 
